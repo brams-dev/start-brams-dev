@@ -53,7 +53,7 @@ const initialState = {
 		}
 	],
 	ipInfoSource: 'ipapi.co',
-	showSeconds: true,
+	showSeconds: false,
 	showDate: false,
 	isMinimized: false
 };
