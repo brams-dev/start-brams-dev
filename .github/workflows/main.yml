@@ -21,4 +21,4 @@ jobs:
     - name: Install rclone
       run: sudo apt install rclone
     - name: Deploy to BunnyCDN
-      run: rclone sync public :ftp: --ftp-host=storage.bunnycdn.com --ftp-user=${{secrets.RCLONE_START_BRAMS_DEV_USER}} --ftp-pass=${{secrets.RCLONE_START_BRAMS_DEV_PASS}}
+      run: 'rclone sync public :ftp: --ftp-host=storage.bunnycdn.com --ftp-user=${{secrets.RCLONE_START_BRAMS_DEV_USER}} --ftp-pass=${{secrets.RCLONE_START_BRAMS_DEV_PASS}}'
