@@ -1,0 +1,36 @@
+.Bookmark {
+	font-size: 1.6rem;
+	font-weight: 300;
+	transition: 0.5s ease font-weight;
+	width: 33%;
+	flex-grow: 1;
+
+	a {
+		display: flex;
+		width: 100%;
+		height: 4rem;
+		align-items: center;
+
+		.image {
+			width: 3rem;
+			height: 100%;
+			margin: 0 0.5rem 0 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			img {
+				height: 2.4rem;
+			}
+		}
+		
+		.name {
+			background-color: rgba(white, 0.01);
+		}
+	}
+
+	&:hover {
+		font-weight: 800;
+		border-bottom-color: white;
+	}
+}

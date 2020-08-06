@@ -1,0 +1,36 @@
+main {
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	.Start {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		background-color: rgba(black, 1);
+		box-shadow: 0 0 1rem rgba(black, 0.5);
+		padding: 1rem;
+		
+		.background-url {
+			margin-top: 3rem;
+			background-color: transparent;
+			width: 100%;
+			border: none;
+			color: white;
+			text-align: center;
+			font-size: 1rem;
+		}
+
+		.minimizeable {
+			transition: 0.3s ease all;
+			height: 100%;
+
+			&.minimized-true {
+				display: none;
+			}
+		}
+	}
+}
