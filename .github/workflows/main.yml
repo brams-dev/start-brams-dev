@@ -3,21 +3,21 @@ name: CI
 on:
   push:
     branches: [ master ]
-		
+    
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-		- uses: actions/checkout@v2
-		- name: Use Node.js
-			uses: actions/setup-node@v1
-			with:
-				registry-url: https://npm.fontawesome.com
-				scope: '@fortawesome'
-		- name: Install dependencies
-			run: npm ci
-			env:
-				NODE_AUTH_TOKEN: ${{secrets.NPM_FORTAWESOME_TOKEN}}
-		- name: Deploy to BunnyCDN
-			run: sudo apt install rclone
-			run: rclone sync public :ftp: --ftp-host=storage.bunnycdn.com --ftp-user=${{secrets.RCLONE_START_BRAMS_DEV_USER}} --ftp-pass=${{secrets.RCLONE_START_BRAMS_DEV_PASS}}
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        registry-url: https://npm.fontawesome.com
+        scope: '@fortawesome'
+    - name: Install dependencies
+      run: npm ci
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.NPM_FORTAWESOME_TOKEN}}
+    - name: Deploy to BunnyCDN
+      run: sudo apt install rclone
+      run: rclone sync public :ftp: --ftp-host=storage.bunnycdn.com --ftp-user=${{secrets.RCLONE_START_BRAMS_DEV_USER}} --ftp-pass=${{secrets.RCLONE_START_BRAMS_DEV_PASS}}
