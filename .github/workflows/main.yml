@@ -21,9 +21,12 @@ jobs:
       run: npm ci
       env:
         NODE_AUTH_TOKEN: ${{secrets.NPM_FORTAWESOME_TOKEN}}
+		
+		- name: Build
+		  run: npm run build
 
     - name: Install rclone
       run: curl https://rclone.org/install.sh | sudo bash
 
     - name: Deploy to BunnyCDN
-      run: 'rclone sync public :ftp: --ftp-host=storage.bunnycdn.com --ftp-user=${{secrets.RCLONE_START_BRAMS_DEV_USER}} --ftp-pass=${{secrets.RCLONE_START_BRAMS_DEV_PASS}}'
+      run: 'rclone sync $GITHUB_WORKSPACE/public :ftp: --ftp-host=storage.bunnycdn.com --ftp-user=${{secrets.RCLONE_START_BRAMS_DEV_USER}} --ftp-pass=${{secrets.RCLONE_START_BRAMS_DEV_PASS}}'
