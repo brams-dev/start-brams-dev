@@ -24,7 +24,6 @@ export default function Start() {
 				<Options />
 				<div className={`minimizeable minimized-${isMinimized}`}>
 					<Clock />
-					<DuckDuckGo />
 					<Bookmarks />
 					<IPInfo />
 				</div>
