@@ -8,7 +8,7 @@ export default function Bookmark({ name, href, show }) {
 
 	return (
 		<div className='Bookmark'>
-			<a href={href} rel='noopener'>
+			<a href={href} target='__blank' rel='noopener'>
 				<span className='image'>
 					<img src={`https://api.faviconkit.com/${url.hostname}/24`} />
 				</span>
