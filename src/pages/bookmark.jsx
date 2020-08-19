@@ -1,4 +1,5 @@
 export default function Bookmark(props) {
 	const url = props['*'];
-	window.location.replace(url);
+	if (typeof window !== 'undefined') window.location.replace(url);
+	return null;
 }
