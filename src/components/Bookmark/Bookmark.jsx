@@ -1,5 +1,6 @@
 import React from 'react';
 import './Bookmark.scss';
+import { Link } from 'gatsby';
 
 export default function Bookmark({ name, href, show }) {	
 	if (!show) return null;
@@ -8,14 +9,14 @@ export default function Bookmark({ name, href, show }) {
 
 	return (
 		<div className='Bookmark'>
-			<a href={href} target='__blank' rel='noopener'>
+			<Link to={`/bookmark/${href}`}>
 				<span className='image'>
 					<img src={`https://api.faviconkit.com/${url.hostname}/24`} />
 				</span>
 				<span className='name'>
 					{name}
 				</span>
-			</a>
+			</Link>
 		</div>
 	)
 }
