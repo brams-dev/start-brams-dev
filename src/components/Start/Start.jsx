@@ -4,7 +4,7 @@ import { selectWallpaper, selectIsMinimized } from './../../redux/settingsSlice'
 import './Start.scss';
 import Options from './../Options/Options';
 import Clock from './../Clock/Clock';
-import DuckDuckGo from './../DuckDuckGo/DuckDuckGo';
+// import DuckDuckGo from './../DuckDuckGo/DuckDuckGo';
 import Bookmarks from './../Bookmarks/Bookmarks';
 import IPInfo from './../IPInfo/IPInfo';
 
@@ -24,6 +24,7 @@ export default function Start() {
 				<Options />
 				<div className={`minimizeable minimized-${isMinimized}`}>
 					<Clock />
+					{/* <DuckDuckGo /> */}
 					<Bookmarks />
 					<IPInfo />
 				</div>

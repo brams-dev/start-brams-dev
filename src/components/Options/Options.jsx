@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { IoSettingsOutline } from 'react-icons/io5';
+import { VscChromeMinimize } from 'react-icons/vsc';
 import './Options.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWindowMinimize, faCog } from '@fortawesome/pro-light-svg-icons';
 import { toggleIsMinimized, selectIsMinimized } from './../../redux/settingsSlice';
 
 export default function Options() {
@@ -12,10 +12,10 @@ export default function Options() {
 	return (
 		<div className={`Options minimized-${isMinimized}`}>
 			<button onClick={() => dispatch(toggleIsMinimized())}>
-				<FontAwesomeIcon icon={faWindowMinimize} />
+				<VscChromeMinimize />
 			</button>
 			<button onClick={() => dispatch(toggleIsMinimized())}>
-				<FontAwesomeIcon icon={faCog} />
+				<IoSettingsOutline />
 			</button>
 		</div>
 	);

@@ -24,8 +24,8 @@ const initialState = {
 			show: true
 		},
 		{
-			name: 'VRT NWS',
-			href: 'https://www.vrt.be/vrtnws/nl/',
+			name: 'Todoist',
+			href: 'https://todoist.com/app',
 			show: true
 		},
 		{

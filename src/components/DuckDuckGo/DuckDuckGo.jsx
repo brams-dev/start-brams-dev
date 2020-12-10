@@ -1,8 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './DuckDuckGo.scss';
 import DuckDuckGoIcon from './../../assets/duckduckgo.svg';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLongArrowRight } from '@fortawesome/pro-light-svg-icons';
+import { BsArrowRight } from 'react-icons/bs';
 import { useEffect } from 'react';
 
 export default function DuckDuckGo() {
@@ -31,7 +30,7 @@ export default function DuckDuckGo() {
 				className='arrow-right'
 				href={getSearchLink()}
 			>
-				<FontAwesomeIcon icon={faLongArrowRight} />
+				<BsArrowRight />
 			</a>
 		</div>
 	);
