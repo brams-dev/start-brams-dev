@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import fern from './../assets/fern.jpg';
 
 const width = typeof window !== 'undefined' ? window.screen.width : 1920;
 const height = typeof window !== 'undefined' ? window.screen.height : 1080;
 
 const initialState = {
-	wallpaper: `https://source.unsplash.com/collection/11626505/${width}x${height}`,
+	wallpaper: fern,
+	//wallpaper: `https://source.unsplash.com/collection/11626505/${width}x${height}`,
 	bookmarks: [
 		{
 			name: 'Hacker News',
