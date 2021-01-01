@@ -18,11 +18,11 @@ jobs:
       run: npm ci
         
     - name: Build
-      run: npm run build
+      run: npm run export
 
     - name: Deploy to BunnyCDN
       uses: ayeressian/bunnycdn-storage-deploy@master
       with:
-        source: "public"
+        source: "out"
         storageZoneName: "start-brams-dev"
         accessKey: "${{ secrets.BUNNY_CDN_STORAGE_KEY }}"

@@ -1,0 +1,31 @@
+.container {
+	height: 100vh;
+	width: 100vw;
+	background-image: url('/fern.webp');
+	background-size: cover;
+	background-position: center center;
+}
+
+.main {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+	color: white;
+	font-size: 4rem;
+	font-weight: 600;
+	font-family: 'Fira Code';
+	/* z-index: 999; */
+}
+
+.positionGrid {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+}
