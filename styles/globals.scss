@@ -1,0 +1,29 @@
+@import './Home.scss';
+@import './Settings.scss';
+@import './Clock.scss';
+
+html,
+body {
+	padding: 0;
+	margin: 0;
+	font-family: 'Fira Code', monospace;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+* {
+	box-sizing: border-box;
+	user-select: none;
+}
+
+input {
+	user-select: initial;
+
+	&::selection {
+		color: rgba(0, 0, 0, 0.8);
+		background-color: rgba(255, 255, 255, 0.8);
+	}
+}

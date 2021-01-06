@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import useInterval from './../../hooks/useInterval';
-import styles from './../../styles/Clock.module.css';
 
 export default function Clock(props) {
 	const [time, setTime] = useState({});
@@ -18,7 +17,7 @@ export default function Clock(props) {
 	useInterval(updateTime, 1000);
 
 	return (
-		<div className='Clock' className={styles.container}>
+		<div className='Clock' style={{ backgroundColor: `rgba(0, 0, 0, ${props.opacity ?? 0.5})` }}>
 			{time.hour}:{time.min}{props.shouldShowSeconds ? `:${time.sec}` : ''}
 		</div>
 	);

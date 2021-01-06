@@ -1,0 +1,114 @@
+.double-tap-catcher {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+.Settings {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	color: rgba(255, 255, 255, 0.8);
+
+	.close {
+		cursor: pointer;
+		
+		margin: -1.2rem 0 1rem 1rem;
+		font-size: 0.7rem;
+		width: 100%;
+		text-align: right;
+	}
+
+	.items {
+		padding: 2rem;
+		border-radius: 1.2rem;
+
+		.item {
+			padding-bottom: 1.2rem;
+			margin-bottom: 1.2rem;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+			&:last-of-type {
+				padding-bottom: 0;
+				margin-bottom: 0;
+				border-bottom: none;
+			}
+
+			h2 {
+				font-size: 1rem;
+				font-weight: 600;
+				padding: 0;
+				margin: 0 0 0.3rem 0;
+				font-style: italic;
+				text-transform: lowercase;
+				color: rgba(255, 255, 255, 0.9);
+				width: 100%;
+			}
+		}
+
+		.clock-position {
+			.position-grid {
+				width: 10rem;
+				height: 10rem;
+				z-index: 1;
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				cursor: pointer;
+
+				div {
+					border: 1px solid rgba(255, 255, 255, 0.8);
+				}
+
+				.selected {
+					background-color: rgba(255, 255, 255, 0.4);
+				}
+			}
+		}
+
+		.clock-seconds {
+			span {
+				cursor: pointer;
+				color: white;
+				text-decoration: line-through;
+
+				&.selected {
+					text-decoration: none;
+				}
+			}
+		}
+
+		.background {
+			input {
+				background-color: transparent;
+				border: 1px solid rgba(255, 255, 255, 0.8);
+				padding: 0.4rem;
+				color: white;
+				width: 100%;
+			}
+		}
+
+		.opacity {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+
+			input {
+				width: 100%;
+			}
+		}
+	}
+}
