@@ -24,7 +24,7 @@ export default function Home() {
 			component: Clock,
 			position: settings?.positions?.clock,
 			props: {
-				opacity: settings?.opacity,
+				opacity: settings?.general?.opacity,
 				shouldShowSeconds: settings?.clock?.shouldShowSeconds
 			}
 		},
@@ -32,7 +32,7 @@ export default function Home() {
 			component: Todoist,
 			position: settings?.positions?.todoist,
 			props: {
-				opacity: settings?.opacity,
+				opacity: settings?.general?.opacity,
 				token: settings?.todoist?.token
 			}
 		}
