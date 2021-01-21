@@ -1,16 +1,50 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import Clock from '../components/Clock';
+import Clock from './../components/Clock';
+import Todoist from './../components/Todoist';
 import Settings from './../components/Settings';
 
+const POSITIONS = [
+	'TOP_LEFT',
+	'TOP_CENTER',
+	'TOP_RIGHT',
+	'MIDDLE_LEFT',
+	'MIDDLE_CENTER',
+	'MIDDLE_RIGHT',
+	'BOTTOM_LEFT',
+	'BOTTOM_CENTER',
+	'BOTTOM_RIGHT'
+];
+
 export default function Home() {
-	const [settings, setSettings] = useState({});
+	const [settings, setSettings] = useState(null);
+
+	const components = [
+		{
+			component: Clock,
+			position: settings?.positions?.clock,
+			props: {
+				opacity: settings?.opacity,
+				shouldShowSeconds: settings?.clock?.shouldShowSeconds
+			}
+		},
+		{
+			component: Todoist,
+			position: settings?.positions?.todoist,
+			props: {
+				opacity: settings?.opacity,
+				token: settings?.todoist?.token
+			}
+		}
+	];
+
+	console.log(settings);
 
 	return (
 		<div
 			className='Home'
 			style={{
-				backgroundImage: `url(${settings.background})`
+				backgroundImage: `url(${settings?.general?.background})`
 			}}
 		>
 			<Head>
@@ -18,13 +52,18 @@ export default function Home() {
 				{/* <link rel="icon" href="/favicon.ico" /> */}
 			</Head>
 
-			<main
-				style={{...settings.clockPosition}}
-			>
-				<Clock opacity={settings.opacity} shouldShowSeconds={settings.shouldShowSeconds} />
+			<main>
+				{settings && POSITIONS.map(POS => (
+					<div className={`position-area ${POS}`} key={POS}>
+						{components.filter(c => c.position === POS).map(c => {
+							const Component = c.component;
+							return <Component key={c.component.name} {...c.props} />
+						})}
+					</div>
+				))}
 			</main>
 
-			<Settings setSettings={setSettings} />
+			<Settings setSettings={setSettings} POSITIONS={POSITIONS} />
 		</div>
 	)
 }

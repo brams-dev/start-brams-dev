@@ -1,0 +1,75 @@
+.Todoist {
+	font-size: 0.8rem;
+	font-weight: 400;
+	padding: 1.2rem;
+	border-radius: 1.2rem;
+	max-width: 30rem;
+
+	.tasks {
+		margin: 0 0 1.5rem 0;
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+
+		h3 {
+			font-size: 0.8rem;
+			margin: 0 0 0.5rem 0;
+			border-bottom: 1px solid white;
+		}
+
+		.tasks-list {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+
+			.task {
+				margin-bottom: 0.3rem;
+				--color-circle: black;
+
+				&:last-of-type {
+					margin-bottom: 0;
+				}
+
+				&:hover {
+					text-decoration: underline;
+				}
+
+				.circle {
+					width: 0.6rem;
+					height: 0.6rem;
+					border-radius: 0.6rem;
+					border: 2px solid var(--color-circle);
+					margin-right: 0.5rem;
+					display: inline-block;
+				}
+
+				&.priority--1 {
+					--color-circle: #F6F6F6;
+				}
+
+				&.priority--2 {
+					--color-circle: #3777D1;
+				}
+
+				&.priority--3 {
+					--color-circle: #F79A32;
+				}
+
+				&.priority--4 {
+					--color-circle: #E14B4B;
+				}
+			}
+		}
+	}
+	
+	
+
+	.overdue {
+
+	}
+
+	.today {
+
+	}
+}

@@ -7,8 +7,6 @@
 
 	main {
 		position: relative;
-		display: flex;
-		flex-direction: column;
 		width: 100vw;
 		height: 100vh;
 		color: white;
@@ -16,5 +14,67 @@
 		font-weight: 600;
 		font-family: 'Fira Code';
 		/* z-index: 999; */
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: repeat(3, 1fr);
+
+		.position-area {
+			display: flex;
+			flex-direction: column;
+			padding: 1rem;
+
+			div {
+				margin-bottom: 1rem;
+
+				&:last-of-type {
+					margin-bottom: 0;
+				}
+			}
+
+			&.TOP_LEFT {
+				justify-content: flex-start;
+				align-items: flex-start;
+			}
+
+			&.TOP_CENTER {
+				justify-content: flex-start;
+				align-items: center;
+			}
+
+			&.TOP_RIGHT {
+				justify-content: flex-start;
+				align-items: flex-end;
+			}
+
+			&.MIDDLE_LEFT {
+				justify-content: center;
+				align-items: flex-start;
+			}
+
+			&.MIDDLE_CENTER {
+				justify-content: center;
+				align-items: center;
+			}
+
+			&.MIDDLE_RIGHT {
+				justify-content: center;
+				align-items: flex-end;
+			}
+
+			&.BOTTOM_LEFT {
+				justify-content: flex-end;
+				align-items: flex-start;
+			}
+
+			&.BOTTOM_CENTER {
+				justify-content: flex-end;
+				align-items: center;
+			}
+
+			&.BOTTOM_RIGHT {
+				justify-content: flex-end;
+				align-items: flex-end;
+			}
+		}
 	}
 }

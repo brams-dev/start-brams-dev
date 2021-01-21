@@ -1,53 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useDoubleTap } from 'use-double-tap';
 import useKeyPress from './../../hooks/useKeyPress';
 import useLocalStorage from './../../hooks/useLocalStorage';
 
 const INITIAL_SETTINGS = {
-	clockPosition: {
-		alignItems: 'center',
-		justifyContent: 'center'
+	general: {
+		background: '/fern.webp',
+		opacity: 0.5
 	},
-	shouldShowSeconds: false,
-	background: '/fern.webp'
-};
-
-const CLOCK_POSITIONS = {
-	TOP_LEFT: {
-		alignItems: 'flex-start',
-		justifyContent: 'flex-start'
+	positions: {
+		clock: 'TOP_RIGHT',
+		todoist: 'TOP_RIGHT'
 	},
-	TOP_CENTER: {
-		alignItems: 'center',
-		justifyContent: 'flex-start'
+	clock: {
+		shouldShowSeconds: false
 	},
-	TOP_RIGHT: {
-		alignItems: 'flex-end',
-		justifyContent: 'flex-start'
-	},
-	MIDDLE_LEFT: {
-		alignItems: 'flex-start',
-		justifyContent: 'center'
-	},
-	MIDDLE_CENTER: {
-		alignItems: 'center',
-		justifyContent: 'center'
-	},
-	MIDDLE_RIGHT: {
-		alignItems: 'flex-end',
-		justifyContent: 'center'
-	},
-	BOTTOM_LEFT: {
-		alignItems: 'flex-start',
-		justifyContent: 'flex-end'
-	},
-	BOTTOM_CENTER: {
-		alignItems: 'center',
-		justifyContent: 'flex-end'
-	},
-	BOTTOM_RIGHT: {
-		alignItems: 'flex-end',
-		justifyContent: 'flex-end'
+	todoist: {
+		token: null
 	}
 };
 
@@ -55,7 +23,7 @@ export default function Settings(props) {
 	const [settings, setSettings] = useLocalStorage('settings', INITIAL_SETTINGS);
 	const [showSettings, setShowSettings] = useState(false);
 	const keyPressed = useKeyPress('s');
-	const doubleTapBind = useDoubleTap(() => setShowSettings(!showSettings));
+	const [activeMenuItem, setActiveMenuItem] = useState('general');
 
 	useEffect(() => {
 		if (keyPressed) setShowSettings(!showSettings);
@@ -72,69 +40,135 @@ export default function Settings(props) {
 		return 10 / width * height;
 	};
 
-	const setClockPosition = value => setSettings({ ...settings, clockPosition: value });
-	const setShouldShowSeconds = value => setSettings({ ...settings, shouldShowSeconds: value });
-	const setBackground = value => setSettings({ ...settings, background: value });
-	const setOpacity = value => setSettings({ ...settings, opacity: value });
+	const setClockPosition = value => setSettings({ ...settings, positions: { ...settings.positions, clock: value } });
+	const setTodoistPosition = value => setSettings({ ...settings, positions: { ...settings.positions, todoist: value } });
+	const setShouldShowSeconds = value => setSettings({ ...settings, clock: { ...setttings.clock, shouldShowSeconds: value } });
+	const setBackground = value => setSettings({ ...settings, general: { ...settings.general, background: value } });
+	const setOpacity = value => setSettings({ ...settings, general: { ...settings.general, opacity: value } });
+	const setTodoistToken = value => setSettings({ ...settings, todoist: { ...settings.todoist, token: value } });
 	
-	if (!showSettings) return <div className='double-tap-catcher' {...doubleTapBind}></div>;
+	if (!showSettings) return null;
+
+	const renderGeneralSettings = () => activeMenuItem === 'general' ? (
+		<>
+			<div className='item background'>
+				<h2>Background</h2>
+				<input type='text' value={settings.general.background} onChange={e => setBackground(e.target.value)} />
+			</div>
+
+			<div className='item opacity'>
+				<h2>Opacity</h2>
+				<span>{Math.round(settings.general.opacity * 100)}%</span>
+				<input
+					type='range'
+					min='0'
+					max='100'
+					step={5}
+					value={settings.general.opacity * 100}
+					onChange={e => setOpacity(e.target.value / 100)}
+				/>
+			</div>
+		</>
+	) : null;
+
+	const renderClockSettings = () => activeMenuItem === 'clock' ? (
+		<>
+			<div className='item position'>
+				<h2>Position</h2>
+				<div
+					className={'position-grid'}
+					style={{
+						width: '10rem',
+						height: getGridHeight() + 'rem'
+					}}
+				>
+					{props.POSITIONS.map(POS => (
+						<div
+							key={`clock-${POS}`}
+							className={JSON.stringify(settings.positions.clock) === JSON.stringify(POS) ? 'selected' : ''}
+							onClick={() => setClockPosition(POS)}
+						></div>
+					))}
+				</div>
+			</div>
+
+			<div className='item clock-seconds'>
+				<h2>Show seconds</h2>
+				<div onClick={() => setShouldShowSeconds(!settings.clock.shouldShowSeconds)}>
+					<span
+						className={settings.clock.shouldShowSeconds ? 'selected' : ''}
+					>
+						Yes
+					</span>
+					{' / '}
+					<span
+						className={!settings.clock.shouldShowSeconds ? 'selected' : ''}
+					>
+						No
+					</span>
+				</div>
+			</div>
+		</>
+	) : null;
+
+	const renderTodoistSettings = () => activeMenuItem === 'todoist' ? (
+		<>
+			<div className='item position'>
+				<h2>Position</h2>
+				<div
+					className={'position-grid'}
+					style={{
+						width: '10rem',
+						height: getGridHeight() + 'rem'
+					}}
+				>
+					{props.POSITIONS.map(POS => (
+						<div
+							key={`todoist-${POS}`}
+							className={JSON.stringify(settings.positions.todoist) === JSON.stringify(POS) ? 'selected' : ''}
+							onClick={() => setTodoistPosition(POS)}
+						></div>
+					))}
+				</div>
+			</div>
+
+			<div className='item todoist-token'>
+				<h2>Token</h2>
+				<input type='text' value={settings.todoist.token} onChange={e => setTodoistToken(e.target.value)} />
+			</div>
+		</>
+	) : null;
 
 	return (
 		<div className='Settings'>
-			<div className='items' style={{ backgroundColor: `rgba(0, 0, 0, ${settings.opacity ?? 0.5})` }}>
-				<div className='close' onClick={() => setShowSettings(false)}>x</div>
-				<div className='item clock-position'>
-					<h2>Clock position</h2>
-					<div
-						className={'position-grid'}
-						style={{
-							width: '10rem',
-							height: getGridHeight() + 'rem'
-						}}
-					>
-						{Object.entries(CLOCK_POSITIONS).map(([key, pos]) => (
-							<div
-								key={key}
-								className={JSON.stringify(settings.clockPosition) === JSON.stringify(pos) ? 'selected' : ''}
-								onClick={() => setClockPosition(pos)}
-							></div>
-						))}
-					</div>
-				</div>
-
-				<div className='item clock-seconds'>
-					<h2>Show seconds</h2>
-					<div onClick={() => setShouldShowSeconds(!settings.shouldShowSeconds)}>
-						<span
-							className={settings.shouldShowSeconds ? 'selected' : ''}
+			<div className='window' style={{ backgroundColor: `rgba(0, 0, 0, ${settings.general.opacity ?? 0.5})` }}>
+				<div className='menu'>
+					<ul>
+						<li
+							onClick={() => setActiveMenuItem('general')}
+							className={`${activeMenuItem === 'general' ? 'active' : ''}`}
 						>
-							Yes
-							</span>
-						{' / '}
-						<span
-							className={!settings.shouldShowSeconds ? 'selected' : ''}
+							General
+						</li>
+						<li
+							onClick={() => setActiveMenuItem('clock')}
+							className={`${activeMenuItem === 'clock' ? 'active' : ''}`}
 						>
-							No
-							</span>
-					</div>
+							Clock
+						</li>
+						<li
+							onClick={() => setActiveMenuItem('todoist')}
+							className={`${activeMenuItem === 'todoist' ? 'active' : ''}`}
+						>
+							Todoist
+						</li>
+					</ul>
 				</div>
-
-				<div className='item background'>
-					<h2>Background</h2>
-					<input type='text' value={settings.background} onChange={e => setBackground(e.target.value)} />
-				</div>
-
-				<div className='item opacity'>
-					<h2>Opacity</h2>
-					<span>{Math.round(settings.opacity * 100)}%</span>
-					<input
-						type='range'
-						min='0' 
-						max='100' 
-						step={5} 
-						value={settings.opacity * 100} 
-						onChange={e => setOpacity(e.target.value / 100)}
-					/>
+				<div className='items'>
+					<div className='close' onClick={() => setShowSettings(false)}>x</div>
+					{renderGeneralSettings()}
+					{renderClockSettings()}
+					{renderTodoistSettings()}
 				</div>
 			</div>
 		</div>
