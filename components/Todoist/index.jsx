@@ -75,6 +75,12 @@ export default function Todoist(props) {
 					{renderTaskList(today)}
 				</div>
 			}
+
+			{tasks?.length <=0 && (
+				<div className='no-tasks'>
+					No more tasks for today 🎉
+				</div>
+			)}
 		</div>
 	);
 }

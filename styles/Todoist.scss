@@ -5,6 +5,10 @@
 	border-radius: 1.2rem;
 	max-width: 30rem;
 
+	.no-tasks {
+		font-style: italic;
+	}
+
 	.tasks {
 		margin: 0 0 1.5rem 0;
 
