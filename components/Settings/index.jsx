@@ -42,7 +42,7 @@ export default function Settings(props) {
 
 	const setClockPosition = value => setSettings({ ...settings, positions: { ...settings.positions, clock: value } });
 	const setTodoistPosition = value => setSettings({ ...settings, positions: { ...settings.positions, todoist: value } });
-	const setShouldShowSeconds = value => setSettings({ ...settings, clock: { ...setttings.clock, shouldShowSeconds: value } });
+	const setShouldShowSeconds = value => setSettings({ ...settings, clock: { ...settings.clock, shouldShowSeconds: value } });
 	const setBackground = value => setSettings({ ...settings, general: { ...settings.general, background: value } });
 	const setOpacity = value => setSettings({ ...settings, general: { ...settings.general, opacity: value } });
 	const setTodoistToken = value => setSettings({ ...settings, todoist: { ...settings.todoist, token: value } });
