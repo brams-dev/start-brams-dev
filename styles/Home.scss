@@ -25,6 +25,7 @@
 
 			div {
 				margin-bottom: 1rem;
+				transition: ease 0.5s background-color;
 
 				&:last-of-type {
 					margin-bottom: 0;
