@@ -26,8 +26,6 @@ export default function Todoist(props) {
 
 	if (!tasks) return null;
 
-	console.log(tasks);
-
 	const overdue = tasks.filter(t => {
 		const dueDate = new Date(t.due.date);
 		const today = new Date((new Date()).toDateString());

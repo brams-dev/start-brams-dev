@@ -38,8 +38,6 @@ export default function Home() {
 		}
 	];
 
-	console.log(settings);
-
 	return (
 		<div
 			className='Home'
