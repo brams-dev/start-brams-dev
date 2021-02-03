@@ -42,7 +42,7 @@ export default function Home() {
 		<div
 			className='Home'
 			style={{
-				backgroundImage: `url(${settings?.general?.background})`
+				backgroundImage: settings?.general?.background ? `url(${settings.general.background})` : ''
 			}}
 		>
 			<Head>
