@@ -134,7 +134,7 @@ export default function Settings(props) {
 
 			<div className='item todoist-token'>
 				<h2>Token</h2>
-				<input type='text' value={settings.todoist.token} onChange={e => setTodoistToken(e.target.value)} />
+				<input type='password' value={settings.todoist.token} onChange={e => setTodoistToken(e.target.value)} />
 			</div>
 		</>
 	) : null;

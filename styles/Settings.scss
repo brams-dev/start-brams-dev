@@ -76,7 +76,7 @@
 		grid-area: 'content';
 		height: 100%;
 
-		input[type="text"] {
+		input[type="text"], input[type="password"] {
 			background-color: transparent;
 			border: 1px solid rgba(255, 255, 255, 0.8);
 			padding: 0.4rem;
