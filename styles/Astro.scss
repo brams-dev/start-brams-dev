@@ -1,0 +1,27 @@
+.Astro {
+	padding: 1.2rem 2rem;
+	border-radius: 1.2rem;
+
+	.sunrise-sunset {
+		display: flex;
+
+		span {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-right: 1.2rem;
+			font-size: 1.2rem;
+			font-weight: 500;
+			
+			&:last-of-type {
+				margin-right: 0;
+			}
+		}
+
+		svg {
+			font-size: 2rem;
+			height: 2rem;
+			margin-right: 0.5rem
+		}
+	}
+}

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Clock from './../components/Clock';
 import Todoist from './../components/Todoist';
 import Settings from './../components/Settings';
+import Astro from '../components/Astro';
 
 const POSITIONS = [
 	'TOP_LEFT',
@@ -34,6 +35,18 @@ export default function Home() {
 			props: {
 				opacity: settings?.general?.opacity,
 				token: settings?.todoist?.token
+			}
+		},
+		{
+			component: Astro,
+			position: settings?.positions?.astro,
+			props: {
+				opacity: settings?.general?.opacity,
+				lat: settings?.astro?.lat,
+				long: settings?.astro?.long,
+				showSun: settings?.astro?.showSun,
+				showMoon: settings?.astro?.showMoon,
+				showPhase: settings?.astro?.showPhase
 			}
 		}
 	];

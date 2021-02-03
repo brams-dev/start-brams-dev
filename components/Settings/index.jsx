@@ -16,6 +16,11 @@ const INITIAL_SETTINGS = {
 	},
 	todoist: {
 		token: null
+	},
+	astro: {
+		showSun: false,
+		lat: '',
+		long: ''
 	}
 };
 
@@ -42,10 +47,16 @@ export default function Settings(props) {
 
 	const setClockPosition = value => setSettings({ ...settings, positions: { ...settings.positions, clock: value } });
 	const setTodoistPosition = value => setSettings({ ...settings, positions: { ...settings.positions, todoist: value } });
+	const setAstroPosition = value => setSettings({ ...settings, positions: { ...settings.positions, astro: value } });
 	const setShouldShowSeconds = value => setSettings({ ...settings, clock: { ...settings.clock, shouldShowSeconds: value } });
 	const setBackground = value => setSettings({ ...settings, general: { ...settings.general, background: value } });
 	const setOpacity = value => setSettings({ ...settings, general: { ...settings.general, opacity: value } });
 	const setTodoistToken = value => setSettings({ ...settings, todoist: { ...settings.todoist, token: value } });
+	const setAstroLat = value => setSettings({ ...settings, astro: { ...settings.astro, lat: value } });
+	const setAstroLong = value => setSettings({ ...settings, astro: { ...settings.astro, long: value } });
+	const setAstroShowSun = value => setSettings({ ...settings, astro: { ...settings.astro, showSun: value } });
+	const setAstroShowMoon = value => setSettings({ ...settings, astro: { ...settings.astro, showMoon: value } });
+	const setAstroShowPhase = value => setSettings({ ...settings, astro: { ...settings.astro, showPhase: value } });
 	
 	if (!showSettings) return null;
 
@@ -92,7 +103,7 @@ export default function Settings(props) {
 				</div>
 			</div>
 
-			<div className='item clock-seconds'>
+			<div className='item yes-no'>
 				<h2>Show seconds</h2>
 				<div onClick={() => setShouldShowSeconds(!settings.clock.shouldShowSeconds)}>
 					<span
@@ -139,6 +150,56 @@ export default function Settings(props) {
 		</>
 	) : null;
 
+	const renderAstroSettings = () => activeMenuItem === 'astro' ? (
+		<>
+			<div className='item yes-no'>
+				<h2>Show sunrise/sunset</h2>
+				<div onClick={() => setAstroShowSun(!settings.astro.showSun)}>
+					<span
+						className={settings.astro.showSun ? 'selected' : ''}
+					>
+						Yes
+					</span>
+					{' / '}
+					<span
+						className={!settings.astro.showSun ? 'selected' : ''}
+					>
+						No
+					</span>
+				</div>
+			</div>
+
+			<div className='item position'>
+				<h2>Position</h2>
+				<div
+					className={'position-grid'}
+					style={{
+						width: '10rem',
+						height: getGridHeight() + 'rem'
+					}}
+				>
+					{props.POSITIONS.map(POS => (
+						<div
+							key={`astro-${POS}`}
+							className={JSON.stringify(settings.positions.astro) === JSON.stringify(POS) ? 'selected' : ''}
+							onClick={() => setAstroPosition(POS)}
+						></div>
+					))}
+				</div>
+			</div>
+
+			<div className='item astro-lat'>
+				<h2>Latitude:</h2>
+				<input type='text' value={settings.astro.lat} onChange={e => setAstroLat(e.target.value)} />
+			</div>
+
+			<div className='item astro-long'>
+				<h2>Longitude:</h2>
+				<input type='text' value={settings.astro.long} onChange={e => setAstroLong(e.target.value)} />
+			</div>
+		</>
+	) : null;
+
 	return (
 		<div className='Settings'>
 			<div className='window' style={{ backgroundColor: `rgba(0, 0, 0, ${settings.general.opacity ?? 0.5})` }}>
@@ -162,6 +223,12 @@ export default function Settings(props) {
 						>
 							Todoist
 						</li>
+						<li
+							onClick={() => setActiveMenuItem('astro')}
+							className={`${activeMenuItem === 'astro' ? 'active' : ''}`}
+						>
+							Astro
+						</li>
 					</ul>
 				</div>
 				<div className='items'>
@@ -169,6 +236,7 @@ export default function Settings(props) {
 					{renderGeneralSettings()}
 					{renderClockSettings()}
 					{renderTodoistSettings()}
+					{renderAstroSettings()}
 				</div>
 			</div>
 		</div>

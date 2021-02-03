@@ -126,14 +126,16 @@
 			}
 		}
 
-		.clock-seconds {
+		.yes-no {
 			span {
 				cursor: pointer;
 				color: white;
 				text-decoration: line-through;
+				font-weight: 300;
 
 				&.selected {
 					text-decoration: none;
+					font-weight: 500;
 				}
 			}
 		}
