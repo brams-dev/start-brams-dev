@@ -25,6 +25,7 @@ export default function Home() {
 			component: Clock,
 			position: settings?.positions?.clock,
 			order: settings?.order?.findIndex(item => item === 'clock'),
+			visible: settings?.visible.clock,
 			props: {
 				opacity: settings?.general?.opacity,
 				shouldShowSeconds: settings?.clock?.shouldShowSeconds
@@ -34,6 +35,7 @@ export default function Home() {
 			component: Todoist,
 			position: settings?.positions?.todoist,
 			order: settings?.order?.findIndex(item => item === 'todoist'),
+			visible: settings?.visible.todoist,
 			props: {
 				opacity: settings?.general?.opacity,
 				token: settings?.todoist?.token
@@ -43,13 +45,11 @@ export default function Home() {
 			component: Astro,
 			position: settings?.positions?.astro,
 			order: settings?.order?.findIndex(item => item === 'astro'),
+			visible: settings?.visible.astro,
 			props: {
 				opacity: settings?.general?.opacity,
 				lat: settings?.astro?.lat,
-				long: settings?.astro?.long,
-				showSun: settings?.astro?.showSun,
-				showMoon: settings?.astro?.showMoon,
-				showPhase: settings?.astro?.showPhase
+				long: settings?.astro?.long
 			}
 		}
 	];
@@ -70,7 +70,7 @@ export default function Home() {
 				{settings && POSITIONS.map(POS => (
 					<div className={`position-area ${POS}`} key={POS}>
 						{components
-							.filter(c => c.position === POS)
+							.filter(c => c.position === POS && c.visible)
 							.sort((a, b) => a.order - b.order)
 							.map(c => {
 								const Component = c.component;

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useKeyPress from './../../hooks/useKeyPress';
 import useLocalStorage from './../../hooks/useLocalStorage';
-import { BsArrowUpShort, BsArrowDownShort } from 'react-icons/bs';
-import { FiArrowUpCircle, FiArrowDownCircle } from 'react-icons/fi';
+import { FiArrowUpCircle, FiArrowDownCircle, FiEyeOff, FiEye } from 'react-icons/fi';
 
 const INITIAL_SETTINGS = {
 	general: {
@@ -17,6 +16,11 @@ const INITIAL_SETTINGS = {
 	positions: {
 		clock: 'TOP_RIGHT',
 		todoist: 'TOP_RIGHT'
+	},
+	visible: {
+		clock: true,
+		todoist: false,
+		astro: true
 	},
 	clock: {
 		shouldShowSeconds: false
@@ -61,7 +65,6 @@ export default function Settings(props) {
 	const setTodoistToken = value => setSettings({ ...settings, todoist: { ...settings.todoist, token: value } });
 	const setAstroLat = value => setSettings({ ...settings, astro: { ...settings.astro, lat: value } });
 	const setAstroLong = value => setSettings({ ...settings, astro: { ...settings.astro, long: value } });
-	const setAstroShowSun = value => setSettings({ ...settings, astro: { ...settings.astro, showSun: value } });
 	const changeOrder = (title, currentPos, direction) => {
 		if (direction === 'up' && currentPos <= 0) return null;
 		if (direction === 'down' && currentPos >= settings.order.length) return null;
@@ -73,10 +76,9 @@ export default function Settings(props) {
 		newOrder[desiredPos] = title;
 		setSettings({ ...settings, order: newOrder });
 	};
+	const setComponentVisibility = title => setSettings({ ...settings, visible: { ...settings.visible, [title]: !settings.visible?.[title] }})
 	
 	if (!showSettings) return null;
-
-	console.log(settings.order.length);
 
 	const renderGeneralSettings = () => activeMenuItem === 'general' ? (
 		<>
@@ -102,7 +104,7 @@ export default function Settings(props) {
 				<h2>Order</h2>
 				<div className='order-items'>
 					{settings.order.map((title, key) => (
-						<div className='order-item' key={title}>
+						<div className={`order-item ${!settings.visible?.[title] ? 'hidden' : ''}`} key={title}>
 							{title}
 							<span className='actions'>
 								{key === 0 ? <span className='icon filler'></span> : <FiArrowUpCircle className='icon' onClick={() => changeOrder(title, key, 'up')} />}
@@ -185,23 +187,6 @@ export default function Settings(props) {
 
 	const renderAstroSettings = () => activeMenuItem === 'astro' ? (
 		<>
-			<div className='item yes-no'>
-				<h2>Show sunrise/sunset</h2>
-				<div onClick={() => setAstroShowSun(!settings.astro.showSun)}>
-					<span
-						className={settings.astro.showSun ? 'selected' : ''}
-					>
-						Yes
-					</span>
-					{' / '}
-					<span
-						className={!settings.astro.showSun ? 'selected' : ''}
-					>
-						No
-					</span>
-				</div>
-			</div>
-
 			<div className='item position'>
 				<h2>Position</h2>
 				<div
@@ -222,12 +207,12 @@ export default function Settings(props) {
 			</div>
 
 			<div className='item astro-lat'>
-				<h2>Latitude:</h2>
+				<h2>Latitude</h2>
 				<input type='text' value={settings.astro.lat} onChange={e => setAstroLat(e.target.value)} />
 			</div>
 
 			<div className='item astro-long'>
-				<h2>Longitude:</h2>
+				<h2>Longitude</h2>
 				<input type='text' value={settings.astro.long} onChange={e => setAstroLong(e.target.value)} />
 			</div>
 		</>
@@ -249,9 +234,14 @@ export default function Settings(props) {
 							<li
 								key={title}
 								onClick={() => setActiveMenuItem(title)}
-								className={`${activeMenuItem === title ? 'active' : ''}`}
+								className={`${activeMenuItem === title ? 'active' : ''} ${!settings.visible?.[title] ? 'hidden' : ''}`}
 							>
 								{title}
+								{
+									settings.visible?.[title]
+										? <FiEye onClick={e => { e.stopPropagation(); setComponentVisibility(title); }} />
+										: <FiEyeOff onClick={e => { e.stopPropagation(); setComponentVisibility(title); }} />
+								}
 							</li>
 						))}
 					</ul>

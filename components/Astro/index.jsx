@@ -16,11 +16,10 @@ export default function Astro(props) {
 	};
 
 	if (!data) return null;
-	if (!props.showSun) return null;
 
 	return (
 		<div className='Astro' style={{ backgroundColor: `rgba(0, 0, 0, ${props.opacity ?? 0.5})` }}>
-			{props.showSun && data?.results?.sunrise && data?.results?.sunset && renderSunriseSunset()}
+			{data?.results?.sunrise && data?.results?.sunset && renderSunriseSunset()}
 		</div>
 	);
 }
