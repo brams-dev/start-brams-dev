@@ -160,5 +160,30 @@
 				width: 100%;
 			}
 		}
+
+		.component-order {
+			.order-items {
+				display: flex;
+				flex-direction: column;
+
+				.order-item {
+					width: 100%;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+
+					.filler {
+						width: 19.2px;
+						display: inline-block;
+					}
+
+					.icon {
+						font-size: 1.2rem;
+						margin-left: 0.2rem;
+						cursor: pointer;
+					}
+				}
+			}
+		}
 	}
 }

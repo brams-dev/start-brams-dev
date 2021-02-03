@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import useKeyPress from './../../hooks/useKeyPress';
 import useLocalStorage from './../../hooks/useLocalStorage';
+import { BsArrowUpShort, BsArrowDownShort } from 'react-icons/bs';
+import { FiArrowUpCircle, FiArrowDownCircle } from 'react-icons/fi';
 
 const INITIAL_SETTINGS = {
 	general: {
 		background: '/fern.webp',
 		opacity: 0.5
 	},
+	order: [
+		'clock',
+		'astro',
+		'todoist'
+	],
 	positions: {
 		clock: 'TOP_RIGHT',
 		todoist: 'TOP_RIGHT'
@@ -55,10 +62,21 @@ export default function Settings(props) {
 	const setAstroLat = value => setSettings({ ...settings, astro: { ...settings.astro, lat: value } });
 	const setAstroLong = value => setSettings({ ...settings, astro: { ...settings.astro, long: value } });
 	const setAstroShowSun = value => setSettings({ ...settings, astro: { ...settings.astro, showSun: value } });
-	const setAstroShowMoon = value => setSettings({ ...settings, astro: { ...settings.astro, showMoon: value } });
-	const setAstroShowPhase = value => setSettings({ ...settings, astro: { ...settings.astro, showPhase: value } });
+	const changeOrder = (title, currentPos, direction) => {
+		if (direction === 'up' && currentPos <= 0) return null;
+		if (direction === 'down' && currentPos >= settings.order.length) return null;
+
+		const desiredPos = direction === 'up' ? currentPos - 1 : currentPos + 1;
+		
+		const newOrder = settings.order.slice();
+		newOrder[currentPos] = newOrder[desiredPos];
+		newOrder[desiredPos] = title;
+		setSettings({ ...settings, order: newOrder });
+	};
 	
 	if (!showSettings) return null;
+
+	console.log(settings.order.length);
 
 	const renderGeneralSettings = () => activeMenuItem === 'general' ? (
 		<>
@@ -78,6 +96,21 @@ export default function Settings(props) {
 					value={settings.general.opacity * 100}
 					onChange={e => setOpacity(e.target.value / 100)}
 				/>
+			</div>
+
+			<div className='item component-order'>
+				<h2>Order</h2>
+				<div className='order-items'>
+					{settings.order.map((title, key) => (
+						<div className='order-item' key={title}>
+							{title}
+							<span className='actions'>
+								{key === 0 ? <span className='icon filler'></span> : <FiArrowUpCircle className='icon' onClick={() => changeOrder(title, key, 'up')} />}
+								{key === settings.order.length - 1 ? <span className='icon filler'></span> : <FiArrowDownCircle className='icon' onClick={() => changeOrder(title, key, 'down')} />}
+							</span>
+						</div>
+					))}
+				</div>
 			</div>
 		</>
 	) : null;
@@ -211,24 +244,16 @@ export default function Settings(props) {
 						>
 							General
 						</li>
-						<li
-							onClick={() => setActiveMenuItem('clock')}
-							className={`${activeMenuItem === 'clock' ? 'active' : ''}`}
-						>
-							Clock
-						</li>
-						<li
-							onClick={() => setActiveMenuItem('todoist')}
-							className={`${activeMenuItem === 'todoist' ? 'active' : ''}`}
-						>
-							Todoist
-						</li>
-						<li
-							onClick={() => setActiveMenuItem('astro')}
-							className={`${activeMenuItem === 'astro' ? 'active' : ''}`}
-						>
-							Astro
-						</li>
+
+						{settings.order.map(title => (
+							<li
+								key={title}
+								onClick={() => setActiveMenuItem(title)}
+								className={`${activeMenuItem === title ? 'active' : ''}`}
+							>
+								{title}
+							</li>
+						))}
 					</ul>
 				</div>
 				<div className='items'>
