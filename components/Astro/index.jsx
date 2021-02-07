@@ -9,8 +9,8 @@ export default function Astro(props) {
 		const sunset = new Date(data.results.sunset);
 		return (
 			<div className='sunrise-sunset'>
-				<span className='sunrise'><WiSunrise />{sunrise.getHours()}:{sunrise.getMinutes()}</span>
-				<span className='sunset'><WiSunset />{sunset.getHours()}:{sunset.getMinutes()}</span>
+				<span className='sunrise'><WiSunrise />{sunrise.getHours()}:{`0${sunrise.getMinutes()}`.slice(-2)}</span>
+				<span className='sunset'><WiSunset />{sunset.getHours()}:{`0${sunset.getMinutes()}`.slice(-2)}</span>
 			</div>
 		);
 	};
