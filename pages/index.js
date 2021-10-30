@@ -64,6 +64,7 @@ export default function Home() {
 			<Head>
 				<title>⭐</title>
 				{/* <link rel="icon" href="/favicon.ico" /> */}
+				<script defer data-domain="start.brams.dev" src="https://hit.brams.app/js/script.js"></script>
 			</Head>
 
 			<main>
