@@ -67,8 +67,8 @@ export default function Astro(props) {
 					volume={props.volume}
 					width={400}
 					height={225}
+					light={true}
 				/>
-				<span className='overlay' onClick={togglePlayerState}></span>
 			</div>
 			{(props.showViewers && viewers && viewers !== 0) && (
 				<div className='viewers'>
