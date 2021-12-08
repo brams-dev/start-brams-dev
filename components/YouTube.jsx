@@ -10,7 +10,8 @@ export default function Astro(props) {
 	const playerRef = useRef();
 
 	const {
-		viewersUpdateInterval
+		viewersUpdateInterval,
+		videoId
 	} = props;
 
 	useEffect(() => {
@@ -20,7 +21,7 @@ export default function Astro(props) {
 			let result;
 			try {
 				result = await axios.get(
-					`https://youtube.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&id=${props.videoId}&key=${API_KEY}`
+					`https://youtube.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&id=${videoId}&key=${API_KEY}`
 				);
 			} catch (error) {
 				console.log(error);
@@ -34,7 +35,7 @@ export default function Astro(props) {
 		getViewers();
 
 		return () => clearInterval(interval);
-	}, [viewersUpdateInterval]);
+	}, [viewersUpdateInterval, videoId]);
 
 	const togglePlayerState = () => {
 		setIsPlaying(!isPlaying);

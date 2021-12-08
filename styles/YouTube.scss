@@ -2,15 +2,11 @@
 	padding: 0;
 	border-radius: 1.2rem;
 	overflow: hidden;
-
-	iframe {
-		margin-bottom: -1.2rem;
-	}
 	
 	.viewers {
 		font-size: 0.8rem;
 		font-weight: 500;
-		margin-top: 0.6rem;
+		margin-top: 0.2rem;
 		padding: 0 0 0.6rem 1.2rem;
 		display: flex;
 		align-items: center;
@@ -42,6 +38,7 @@
 
 	.player {
 		position: relative;
+		margin-bottom: 0.6rem;
 
 		.overlay {
 			position: absolute;
