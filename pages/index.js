@@ -4,6 +4,7 @@ import Clock from './../components/Clock';
 import Todoist from './../components/Todoist';
 import Settings from './../components/Settings';
 import Astro from '../components/Astro';
+import YouTube from './../components/YouTube';
 
 const POSITIONS = [
 	'TOP_LEFT',
@@ -50,6 +51,16 @@ export default function Home() {
 				opacity: settings?.general?.opacity,
 				lat: settings?.astro?.lat,
 				long: settings?.astro?.long
+			}
+		},
+		{
+			component: YouTube,
+			position: settings?.positions?.youtube,
+			order: settings?.order?.findIndex(item => item === 'youtube'),
+			visible: settings?.visible.youtube,
+			props: {
+				opacity: settings?.general?.opacity,
+				...settings?.youtube
 			}
 		}
 	];

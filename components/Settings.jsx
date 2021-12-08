@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import useKeyPress from './../../hooks/useKeyPress';
-import useLocalStorage from './../../hooks/useLocalStorage';
+import useKeyPress from '../hooks/useKeyPress';
+import useLocalStorage from '../hooks/useLocalStorage';
 import { FiArrowUpCircle, FiArrowDownCircle, FiEyeOff, FiEye } from 'react-icons/fi';
 
 const INITIAL_SETTINGS = {
@@ -11,7 +11,8 @@ const INITIAL_SETTINGS = {
 	order: [
 		'clock',
 		'astro',
-		'todoist'
+		'todoist',
+		'youtube'
 	],
 	positions: {
 		clock: 'TOP_RIGHT',
@@ -32,6 +33,12 @@ const INITIAL_SETTINGS = {
 		showSun: false,
 		lat: '',
 		long: ''
+	},
+	youtube: {
+		volume: 0.2,
+		videoId: '5qap5aO4i9A',
+		showViewers: true,
+		viewersUpdateInterval: 30000
 	}
 };
 
@@ -59,12 +66,17 @@ export default function Settings(props) {
 	const setClockPosition = value => setSettings({ ...settings, positions: { ...settings.positions, clock: value } });
 	const setTodoistPosition = value => setSettings({ ...settings, positions: { ...settings.positions, todoist: value } });
 	const setAstroPosition = value => setSettings({ ...settings, positions: { ...settings.positions, astro: value } });
+	const setYouTubePosition = value => setSettings({ ...settings, positions: { ...settings.positions, youtube: value } });
 	const setShouldShowSeconds = value => setSettings({ ...settings, clock: { ...settings.clock, shouldShowSeconds: value } });
 	const setBackground = value => setSettings({ ...settings, general: { ...settings.general, background: value } });
 	const setOpacity = value => setSettings({ ...settings, general: { ...settings.general, opacity: value } });
 	const setTodoistToken = value => setSettings({ ...settings, todoist: { ...settings.todoist, token: value } });
 	const setAstroLat = value => setSettings({ ...settings, astro: { ...settings.astro, lat: value } });
 	const setAstroLong = value => setSettings({ ...settings, astro: { ...settings.astro, long: value } });
+	const setYouTubeVideoId = value => setSettings({ ...settings, youtube: { ...settings.youtube, videoId: value } });
+	const setYouTubeVolume = value => setSettings({ ...settings, youtube: { ...settings.youtube, volume: value } });
+	const setYouTubeShowViewers = value => setSettings({ ...settings, youtube: { ...settings.youtube, showViewers: value } });
+	const setYouTubeViewersUpdateInterval = value => setSettings({ ...settings, youtube: { ...settings.youtube, viewersUpdateInterval: value } });
 	const changeOrder = (title, currentPos, direction) => {
 		if (direction === 'up' && currentPos <= 0) return null;
 		if (direction === 'down' && currentPos >= settings.order.length) return null;
@@ -76,7 +88,7 @@ export default function Settings(props) {
 		newOrder[desiredPos] = title;
 		setSettings({ ...settings, order: newOrder });
 	};
-	const setComponentVisibility = title => setSettings({ ...settings, visible: { ...settings.visible, [title]: !settings.visible?.[title] }})
+	const setComponentVisibility = title => setSettings({ ...settings, visible: { ...settings.visible, [title]: !settings.visible?.[title] }});
 	
 	if (!showSettings) return null;
 
@@ -218,6 +230,69 @@ export default function Settings(props) {
 		</>
 	) : null;
 
+	const renderYouTubeSettings = () => activeMenuItem === 'youtube' ? (
+		<>
+			<div className='item position'>
+				<h2>Position</h2>
+				<div
+					className={'position-grid'}
+					style={{
+						width: '10rem',
+						height: getGridHeight() + 'rem'
+					}}
+				>
+					{props.POSITIONS.map(POS => (
+						<div
+							key={`youtube-${POS}`}
+							className={JSON.stringify(settings.positions.youtube) === JSON.stringify(POS) ? 'selected' : ''}
+							onClick={() => setYouTubePosition(POS)}
+						></div>
+					))}
+				</div>
+			</div>
+
+			<div className='item youtube-videoId'>
+				<h2>Video id</h2>
+				<input type='text' value={settings.youtube.videoId} onChange={e => setYouTubeVideoId(e.target.value)} />
+			</div>
+
+			<div className='item youtube-volume slider'>
+				<h2>Volume</h2>
+				<span>{Math.round(settings.youtube.volume * 100)}%</span>
+				<input
+					type='range'
+					min='0'
+					max='100'
+					step={1}
+					value={settings.youtube.volume * 100}
+					onChange={e => setYouTubeVolume(e.target.value / 100)}
+				/>
+			</div>
+
+			<div className='item yes-no'>
+				<h2>Show viewers</h2>
+				<div onClick={() => setYouTubeShowViewers(!settings.youtube.showViewers)}>
+					<span
+						className={settings.youtube.showViewers ? 'selected' : ''}
+					>
+						Yes
+					</span>
+					{' / '}
+					<span
+						className={!settings.youtube.showViewers ? 'selected' : ''}
+					>
+						No
+					</span>
+				</div>
+			</div>
+
+			<div className='item youtube-update-interval'>
+				<h2>Viewers update interval</h2>
+				<input type='text' value={settings.youtube.viewersUpdateInterval} onChange={e => setYouTubeViewersUpdateInterval(e.target.value)} />
+			</div>
+		</>
+	) : null;
+
 	return (
 		<div className='Settings'>
 			<div className='window' style={{ backgroundColor: `rgba(0, 0, 0, ${settings.general.opacity ?? 0.5})` }}>
@@ -252,6 +327,7 @@ export default function Settings(props) {
 					{renderClockSettings()}
 					{renderTodoistSettings()}
 					{renderAstroSettings()}
+					{renderYouTubeSettings()}
 				</div>
 			</div>
 		</div>

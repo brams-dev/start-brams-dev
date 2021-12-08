@@ -1,0 +1,73 @@
+.YouTube {
+	padding: 0;
+	border-radius: 1.2rem;
+	overflow: hidden;
+
+	iframe {
+		margin-bottom: -1.2rem;
+	}
+	
+	.viewers {
+		font-size: 0.8rem;
+		font-weight: 500;
+		margin-top: 0.6rem;
+		padding: 0 0 0.6rem 1.2rem;
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+	}
+
+	.pulsating-circle {
+		background-color: red;
+		min-width: 0.4rem;
+		min-height: 0.4rem;
+		border-radius: 0.6rem;
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+
+		&::after {
+			content: '';
+			position: absolute;
+			background-color: red;
+			min-width: 1.1rem;
+			min-height: 1.1rem;
+			border-radius: 1.1rem;
+			opacity: 0.5;
+			animation: pulsating-circle 4s linear infinite;
+		}
+	}
+
+	.player {
+		position: relative;
+
+		.overlay {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			cursor: pointer;
+		}
+	}
+}
+
+@keyframes pulsating-circle {
+	0% {
+		min-width: 0.4rem;
+		min-height: 0.4rem;
+		opacity: 1;
+	}
+
+	20% {
+		min-width: 1.5rem;
+		min-height: 1.5rem;
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
