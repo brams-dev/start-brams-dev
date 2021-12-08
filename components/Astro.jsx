@@ -1,8 +1,12 @@
 import { WiSunrise, WiSunset } from 'react-icons/wi';
 import useSWR from 'swr';
 
+const fetcher = (...args) => fetch(...args).then(res => res.json());
+
 export default function Astro(props) {
-	const { data } = useSWR(props.lat && props.long ? `https://api.sunrise-sunset.org/json?lat=${props.lat}&lng=${props.long}&date=today&formatted=0` : null);
+	const { data } = useSWR(props.lat && props.long ? `https://api.sunrise-sunset.org/json?lat=${props.lat}&lng=${props.long}&date=today&formatted=0` : null, fetcher);
+
+	console.log({ props, data });
 
 	const renderSunriseSunset = () => {
 		const sunrise = new Date(data.results.sunrise);
