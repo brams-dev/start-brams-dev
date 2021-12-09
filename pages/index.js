@@ -3,11 +3,11 @@ import { useState } from 'react';
 import Clock from './../components/Clock';
 import Todoist from './../components/Todoist';
 import Settings from './../components/Settings';
-import Astro from '../components/Astro';
-import YouTube from './../components/YouTube';
+import Sun from '../components/Sun';
+import Video from './../components/Video';
 import ClockSettings from '../components/Settings/ClockSettings';
 import TodoistSettings from '../components/Settings/TodoistSettings';
-import SunriseSettings from '../components/Settings/SunriseSettings';
+import SunSettings from '../components/Settings/SunSettings';
 import VideoSettings from '../components/Settings/VideoSettings';
 
 const POSITIONS = [
@@ -33,8 +33,8 @@ const MODULES = [
 		}
 	},
 	{
-		component: Astro,
-		settingsComponent: SunriseSettings,
+		component: Sun,
+		settingsComponent: SunSettings,
 		name: 'sun',
 		defaultSettings: {
 			showSun: false,
@@ -44,9 +44,9 @@ const MODULES = [
 		}
 	},
 	{
-		component: YouTube,
+		component: Video,
 		settingsComponent: VideoSettings,
-		name: 'youtube',
+		name: 'video',
 		defaultSettings: {
 			volume: 0.05,
 			videoId: '5qap5aO4i9A',

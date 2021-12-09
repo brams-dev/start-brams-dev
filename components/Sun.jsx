@@ -3,7 +3,7 @@ import useSWR from 'swr';
 
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
-export default function Astro(props) {
+export default function Sun(props) {
 	const { data } = useSWR(props.lat && props.long ? `https://api.sunrise-sunset.org/json?lat=${props.lat}&lng=${props.long}&date=today&formatted=0` : null, fetcher);
 
 	const renderSunriseSunset = () => {
@@ -20,7 +20,7 @@ export default function Astro(props) {
 	if (!data) return null;
 
 	return (
-		<div className='Astro module'>
+		<div className='Sun module'>
 			{data?.results?.sunrise && data?.results?.sunset && renderSunriseSunset()}
 		</div>
 	);

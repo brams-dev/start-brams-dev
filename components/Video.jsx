@@ -4,7 +4,7 @@ import Player from 'react-player';
 
 const API_KEY = 'AIzaSyD8SOD0l5zzZGw0puDbJlYqB1r1gGEvi8k';
 
-export default function Astro(props) {
+export default function Video(props) {
 	const [viewers, setViewers] = useState(0);
 	const [isPlaying, setIsPlaying] = useState(false);
 	const playerRef = useRef();
@@ -44,7 +44,7 @@ export default function Astro(props) {
 	};
 
 	return (
-		<div className='YouTube module'>
+		<div className='Video module'>
 			<div className='player'>
 				<Player
 					ref={playerRef}
