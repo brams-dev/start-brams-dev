@@ -17,6 +17,14 @@ const YOUTUBE_SUGGESTIONS = [
 		image: '/L9Q1HUdUMp0.png'
 	},
 	{
+		id: '45rdiXqN620',
+		image: 'https://i.ytimg.com/vi/45rdiXqN620/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCO4XAsbGBPKny1IIifRRI1Fsd7pw'
+	},
+	{
+		id: 'LbhKlPNx3Mg',
+		image: 'https://i.ytimg.com/vi/LbhKlPNx3Mg/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDzAYC8h6mzNXQk3Vly1GdoIbcA9w'
+	},
+	{
 		id: 'zVqJv_dKUEs',
 		image: 'https://i.ytimg.com/vi/zVqJv_dKUEs/hq720.jpg'
 	},
@@ -28,10 +36,7 @@ const YOUTUBE_SUGGESTIONS = [
 		id: 'DSGyEsJ17cI',
 		image: 'https://i.ytimg.com/vi/DSGyEsJ17cI/hqdefault_live.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCWDI21MEk676eyaS7OetCwDbns-Q'
 	},
-	{
-		id: '-5KAN9_CzSA',
-		image: 'https://i.ytimg.com/vi/-5KAN9_CzSA/hq720.jpg'
-	},
+
 	{
 		id: 'oKfYJYd0r5w',
 		image: 'https://i.ytimg.com/vi/oKfYJYd0r5w/hqdefault_live.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCfiGXhpq3PxmLubi1FM14SFbIIrw'
