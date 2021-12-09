@@ -1,7 +1,7 @@
-import Position from './SettingItem/Position';
-import Slider from './SettingItem/Slider';
-import Text from './SettingItem/Text';
-import YesNo from './SettingItem/YesNo';
+import Position from '../../components/SettingItem/Position';
+import Slider from '../../components/SettingItem/Slider';
+import Text from '../../components/SettingItem/Text';
+import YesNo from '../../components/SettingItem/YesNo';
 
 const YOUTUBE_SUGGESTIONS = [
 	{

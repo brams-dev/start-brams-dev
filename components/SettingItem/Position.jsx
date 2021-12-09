@@ -1,4 +1,4 @@
-import { getGridHeight } from '../../../lib/helpers';
+import { getGridHeight } from './../../lib/helpers';
 
 export default function Position({ POSITIONS, value, setValue }) {
 	return (

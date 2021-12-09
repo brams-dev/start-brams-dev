@@ -1,6 +1,6 @@
 import { FiArrowDownCircle, FiArrowUpCircle } from 'react-icons/fi';
-import Slider from './SettingItem/Slider';
-import Text from './SettingItem/Text';
+import Slider from '../SettingItem/Slider';
+import Text from '../SettingItem/Text';
 
 const changeOrder = (settings, setSetting, title, currentPos, direction) => {
 	if (direction === 'up' && currentPos <= 0) return null;

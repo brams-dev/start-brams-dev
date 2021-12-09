@@ -1,14 +1,16 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import Clock from './../components/Clock';
-import Todoist from './../components/Todoist';
 import Settings from './../components/Settings';
-import Sun from '../components/Sun';
-import Video from './../components/Video';
-import ClockSettings from '../components/Settings/ClockSettings';
-import TodoistSettings from '../components/Settings/TodoistSettings';
-import SunSettings from '../components/Settings/SunSettings';
-import VideoSettings from '../components/Settings/VideoSettings';
+
+import Clock from './../modules/Clock/module';
+import Sun from './../modules/Sun/module';
+import Video from './../modules/Video/module';
+import Todoist from './../modules/Todoist/module';
+
+import ClockSettings from './../modules/Clock/settings';
+import SunSettings from './../modules/Sun/settings';
+import VideoSettings from './../modules/Video/settings';
+import TodoistSettings from './../modules/Todoist/settings';
 
 const POSITIONS = [
 	'TOP_LEFT',

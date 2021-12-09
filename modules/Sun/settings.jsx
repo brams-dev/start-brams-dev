@@ -1,5 +1,5 @@
-import Position from './SettingItem/Position';
-import Text from './SettingItem/Text';
+import Position from '../../components/SettingItem/Position';
+import Text from '../../components/SettingItem/Text';
 
 export default function SunriseSettings({ POSITIONS, settings, setSetting }) {
 	return (

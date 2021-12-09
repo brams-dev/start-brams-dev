@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import useInterval from '../hooks/useInterval';
+import useInterval from '../../hooks/useInterval';
 
 export default function Clock(props) {
 	const [time, setTime] = useState({});
