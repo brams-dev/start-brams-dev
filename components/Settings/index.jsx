@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import useKeyPress from '../../hooks/useKeyPress';
-import useLocalStorage from '../../hooks/useLocalStorage';
 import { FiEyeOff, FiEye } from 'react-icons/fi';
 import GeneralSettings from './GeneralSettings';
+import semver from 'semver';
 
+const EARLIEST_VERSION = '5.0.0';
+const LATEST_VERSION = '5.0.0';
 const INITIAL_SETTINGS = {
 	general: {
 		background: '/fern.webp',
@@ -11,8 +13,36 @@ const INITIAL_SETTINGS = {
 		order: [],
 		visible: {},
 		radius: 12
-	}
+	},
+	version: LATEST_VERSION
 };
+
+const UPGRADERS = [
+	// {
+	// 	from: '4.2.1',
+	// 	to: '5.0.0',
+	// 	upgrade: settings => {
+	// 		const newSettings = {
+	// 			...settings,
+	// 			video: {
+	// 				...settings.video,
+	// 				url: `https://www.youtube.com/watch?v=${settings.video.videoId}`
+	// 			}
+	// 		};
+
+	// 		delete newSettings.video.videoId;
+	// 		return newSettings;
+	// 	}
+	// }
+];
+
+const upgrade = oldSettings => UPGRADERS.reduce((settings, upgrader) => {
+	if (upgrader.from !== (settings.version ?? EARLIEST_VERSION)) return;
+	return {
+		...upgrader.upgrade(settings),
+		version: upgrader.to
+	};
+}, oldSettings);
 
 export default function Settings(props) {
 	const getDefaultSettings = () => {
@@ -29,18 +59,21 @@ export default function Settings(props) {
 
 		return settings;
 	};
-	const [settings, setSettings] = useLocalStorage('settings', getDefaultSettings());
 	const [showSettings, setShowSettings] = useState(false);
 	const keyPressed = useKeyPress('s');
 	const [activeMenuItem, setActiveMenuItem] = useState('general');
+
+	const { settings, setSettings } = props;
 
 	useEffect(() => {
 		if (keyPressed) setShowSettings(!showSettings);
 	}, [keyPressed]);
 
 	useEffect(() => {
-		console.log(settings);
-		props.setSettings(settings);
+		if (!settings) return setSettings(getDefaultSettings());
+		if (semver.lt(settings.version ?? EARLIEST_VERSION, LATEST_VERSION)) return setSettings(upgrade(settings));
+
+		setSettings(settings);
 	}, [settings]);
 
 	const setSetting = module => key => value => setSettings({ ...settings, [module]: { ...settings?.[module], [key]: value } });

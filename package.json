@@ -1,6 +1,6 @@
 {
 	"name": "start-brams-dev",
-	"version": "4.2.1",
+	"version": "5.0.0",
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
@@ -16,6 +16,7 @@
 		"react-icons": "^4.3.1",
 		"react-player": "^2.9.0",
 		"sass": "^1.44.0",
+		"semver": "^7.3.5",
 		"swr": "^1.1.0",
 		"use-double-tap": "^1.3.3"
 	}

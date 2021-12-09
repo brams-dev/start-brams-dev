@@ -12,6 +12,7 @@ import SunSettings from './../modules/Sun/settings';
 import VideoSettings from './../modules/Video/settings';
 import TodoistSettings from './../modules/Todoist/settings';
 import { GlobalsContext } from './_app';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const MODULES = [
 	{
@@ -58,7 +59,7 @@ const MODULES = [
 ];
 
 export default function Home() {
-	const [settings, setSettings] = useState(null);
+	const [settings, setSettings] = useLocalStorage('settings');
 	const { positions } = useContext(GlobalsContext);
 
 	const getOrder = c => settings?.general?.order?.indexOf(c.name);
@@ -102,7 +103,7 @@ export default function Home() {
 				))}
 			</main>
 
-			<Settings setSettings={setSettings} modules={MODULES} />
+			<Settings settings={settings} setSettings={setSettings} modules={MODULES} />
 		</div>
 	)
 }
