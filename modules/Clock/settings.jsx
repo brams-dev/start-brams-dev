@@ -1,11 +1,10 @@
 import Position from '../../components/SettingItem/Position';
 import YesNo from '../../components/SettingItem/YesNo';
 
-export default function ClockSettings({ POSITIONS, settings, setSetting }) {
+export default function ClockSettings({ settings, setSetting }) {
 	return (
 		<>
 			<Position
-				POSITIONS={POSITIONS}
 				value={settings.position}
 				setValue={setSetting('position')}
 			/>

@@ -50,11 +50,10 @@ const YOUTUBE_SUGGESTIONS = [
 	},
 ];
 
-export default function VideoSettings({ POSITIONS, settings, setSetting }) {
+export default function VideoSettings({ settings, setSetting }) {
 	return (
 		<>
 			<Position
-				POSITIONS={POSITIONS}
 				value={settings.position}
 				setValue={setSetting('position')}
 			/>

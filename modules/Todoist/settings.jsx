@@ -1,11 +1,10 @@
 import Position from '../../components/SettingItem/Position';
 import Text from '../../components/SettingItem/Text';
 
-export default function TodoistSettings({ POSITIONS, settings, setSetting }) {
+export default function TodoistSettings({ settings, setSetting }) {
 	return (
 		<>
 			<Position
-				POSITIONS={POSITIONS}
 				value={settings.position}
 				setValue={setSetting('position')}
 			/>

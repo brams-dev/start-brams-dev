@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Settings from './../components/Settings';
 
 import Clock from './../modules/Clock/module';
@@ -11,18 +11,7 @@ import ClockSettings from './../modules/Clock/settings';
 import SunSettings from './../modules/Sun/settings';
 import VideoSettings from './../modules/Video/settings';
 import TodoistSettings from './../modules/Todoist/settings';
-
-const POSITIONS = [
-	'TOP_LEFT',
-	'TOP_CENTER',
-	'TOP_RIGHT',
-	'MIDDLE_LEFT',
-	'MIDDLE_CENTER',
-	'MIDDLE_RIGHT',
-	'BOTTOM_LEFT',
-	'BOTTOM_CENTER',
-	'BOTTOM_RIGHT'
-];
+import { GlobalsContext } from './_app';
 
 const MODULES = [
 	{
@@ -70,6 +59,7 @@ const MODULES = [
 
 export default function Home() {
 	const [settings, setSettings] = useState(null);
+	const { positions } = useContext(GlobalsContext);
 
 	const getOrder = c => settings?.general?.order?.indexOf(c.name);
 	const getVisible = c => settings?.general?.visible?.[c.name];
@@ -98,10 +88,10 @@ export default function Home() {
 			</Head>
 
 			<main>
-				{settings && POSITIONS.map(POS => (
-					<div className={`position-area ${POS}`} key={POS}>
+				{settings && positions.map(pos => (
+					<div className={`position-area ${pos}`} key={pos}>
 						{MODULES
-							.filter(c => getPosition(c) === POS && getVisible(c))
+							.filter(c => getPosition(c) === pos && getVisible(c))
 							.sort((a, b) => getOrder(a) - getOrder(b))
 							.map(c => {
 								const Component = c.component;
@@ -112,7 +102,7 @@ export default function Home() {
 				))}
 			</main>
 
-			<Settings setSettings={setSettings} POSITIONS={POSITIONS} modules={MODULES} />
+			<Settings setSettings={setSettings} modules={MODULES} />
 		</div>
 	)
 }

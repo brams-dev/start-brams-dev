@@ -34,10 +34,6 @@ export default function Settings(props) {
 	const keyPressed = useKeyPress('s');
 	const [activeMenuItem, setActiveMenuItem] = useState('general');
 
-	const {
-		POSITIONS
-	} = props;
-
 	useEffect(() => {
 		if (keyPressed) setShowSettings(!showSettings);
 	}, [keyPressed]);
@@ -54,7 +50,6 @@ export default function Settings(props) {
 
 		return <Settings
 			key={module.name}
-			POSITIONS={POSITIONS}
 			settings={settings?.[module.name]}
 			setSetting={setSetting(module.name)}
 		/>
