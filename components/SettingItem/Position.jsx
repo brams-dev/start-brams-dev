@@ -12,7 +12,7 @@ export default function Position({ value, setValue }) {
 				className={'position-grid'}
 				style={{
 					width: '10rem',
-					height: getGridHeight() + 'rem'
+					height: getGridHeight(10) + 'rem'
 				}}
 			>
 				{positions.map(pos => (

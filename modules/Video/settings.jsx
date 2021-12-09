@@ -58,21 +58,21 @@ export default function VideoSettings({ settings, setSetting }) {
 				setValue={setSetting('position')}
 			/>
 
-			{/* <div className='item youtube-videoId'>
+			<div className='item youtube-videoId'>
 				<h2>Video id</h2>
 				<div className='suggestions'>
 					{YOUTUBE_SUGGESTIONS.map(suggestion => (
-						<img key={suggestion.id} src={suggestion.image} alt="" onClick={() => setValue({ ...values, videoId: suggestion.id })} />
+						<img key={suggestion.id} src={suggestion.image} alt="" onClick={() => setSetting('videoId')(suggestion.id)} />
 					))}
 				</div>
-				<input type='text' value={values.videoId} onChange={e => setValue({ ...values, videoId: e.target.value })} />
-			</div> */}
+				<input type='text' value={settings.videoId} onChange={e => setSetting('videoId', e.target.value)} />
+			</div>
 
-			<Text
+			{/* <Text
 				title='Video ID'
 				value={settings.videoId}
 				setValue={setSetting('videoId')}
-			/>
+			/> */}
 
 			<Slider
 				title='Volume'
