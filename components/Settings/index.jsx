@@ -5,7 +5,7 @@ import GeneralSettings from './GeneralSettings';
 import semver from 'semver';
 
 const EARLIEST_VERSION = '5.0.0';
-const LATEST_VERSION = '5.0.0';
+const LATEST_VERSION = '5.1.0';
 const INITIAL_SETTINGS = {
 	general: {
 		background: '/fern.webp',
@@ -18,22 +18,22 @@ const INITIAL_SETTINGS = {
 };
 
 const UPGRADERS = [
-	// {
-	// 	from: '4.2.1',
-	// 	to: '5.0.0',
-	// 	upgrade: settings => {
-	// 		const newSettings = {
-	// 			...settings,
-	// 			video: {
-	// 				...settings.video,
-	// 				url: `https://www.youtube.com/watch?v=${settings.video.videoId}`
-	// 			}
-	// 		};
-
-	// 		delete newSettings.video.videoId;
-	// 		return newSettings;
-	// 	}
-	// }
+	{
+		from: EARLIEST_VERSION,
+		to: '5.1.0',
+		upgrade: settings => {
+			return {
+				...settings,
+				general: {
+					...settings.general,
+					order: [
+						...settings.general.order,
+						'bookmarks'
+					]
+				}
+			};
+		}
+	}
 ];
 
 const upgrade = oldSettings => UPGRADERS.reduce((settings, upgrader) => {
@@ -66,7 +66,7 @@ export default function Settings(props) {
 	const { settings, setSettings } = props;
 
 	useEffect(() => {
-		if (keyPressed) setShowSettings(!showSettings);
+		if (keyPressed && !showSettings) setShowSettings(!showSettings);
 	}, [keyPressed]);
 
 	useEffect(() => {
@@ -83,7 +83,7 @@ export default function Settings(props) {
 
 		return <Settings
 			key={module.name}
-			settings={settings?.[module.name]}
+			settings={settings?.[module.name] ?? {}}
 			setSetting={setSetting(module.name)}
 		/>
 	};

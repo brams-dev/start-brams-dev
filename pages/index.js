@@ -1,18 +1,20 @@
-import Head from 'next/head';
 import { useContext, useState } from 'react';
+import Head from 'next/head';
+import { GlobalsContext } from './_app';
+import useLocalStorage from '../hooks/useLocalStorage';
 import Settings from './../components/Settings';
 
 import Clock from './../modules/Clock/module';
 import Sun from './../modules/Sun/module';
+import Bookmarks from './../modules/Bookmarks/module';
 import Video from './../modules/Video/module';
 import Todoist from './../modules/Todoist/module';
 
 import ClockSettings from './../modules/Clock/settings';
 import SunSettings from './../modules/Sun/settings';
+import BookmarksSettings from './../modules/Bookmarks/settings';
 import VideoSettings from './../modules/Video/settings';
 import TodoistSettings from './../modules/Todoist/settings';
-import { GlobalsContext } from './_app';
-import useLocalStorage from '../hooks/useLocalStorage';
 
 const MODULES = [
 	{
@@ -33,6 +35,19 @@ const MODULES = [
 			lat: '51.057',
 			long: '3.720',
 			position: 'TOP_RIGHT'
+		}
+	},
+	{
+		component: Bookmarks,
+		settingsComponent: BookmarksSettings,
+		name: 'bookmarks',
+		defaultSettings: {
+			items: [
+				{
+					name: 'Hacker News',
+					location: 'https://hackernews.com'
+				}
+			]
 		}
 	},
 	{

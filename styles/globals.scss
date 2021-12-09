@@ -4,6 +4,7 @@
 @import './Todoist.scss';
 @import './Sun.scss';
 @import './Video.scss';
+@import './Bookmarks.scss';
 
 html {
 	--radius-default: 1.2rem;
@@ -29,6 +30,7 @@ a {
 
 input {
 	user-select: initial;
+	font-family: 'Fira Code';
 
 	&::selection {
 		color: rgba(0, 0, 0, 0.8);
