@@ -37,19 +37,14 @@ export default function Astro(props) {
 		return () => clearInterval(interval);
 	}, [viewersUpdateInterval, videoId]);
 
-	const togglePlayerState = () => {
-		setIsPlaying(!isPlaying);
-		
-	};
-
 	const skipToLive = () => {
-		if (!isPlaying) setIsPlaying(true);
 		const duration = playerRef.current.getDuration();
 		playerRef.current.seekTo(duration);
-	}
+		if (!isPlaying) setIsPlaying(true);
+	};
 
 	return (
-		<div className='YouTube' style={{ backgroundColor: `rgba(0, 0, 0, ${props.opacity ?? 0.5})` }}>
+		<div className='YouTube module'>
 			<div className='player'>
 				<Player
 					ref={playerRef}
@@ -58,12 +53,14 @@ export default function Astro(props) {
 						youtube: {
 							playerVars: {
 								autoplay: 1,
-								diablekb: 1,
+								disablekb: 1,
 								modestbranding: 1
 							}
 						}
 					}}
 					playing={isPlaying}
+					onPlay={() => setIsPlaying(true)}
+					onPause={() => setIsPlaying(false)}
 					controls={false}
 					volume={props.volume}
 					width={400}
@@ -71,9 +68,13 @@ export default function Astro(props) {
 					light={true}
 				/>
 			</div>
-			{(props.showViewers && viewers && viewers !== 0) && (
+			{(props.showViewers && viewers !== '0' && viewers !== 0) && (
 				<div className='viewers'>
-					<span className='pulsating-circle' onClick={skipToLive}></span>
+					<span
+						className='pulsating-circle'
+						onClick={skipToLive}
+						style={{ '--color': isPlaying ? 'red' : 'grey' }}
+					></span>
 					{new Intl.NumberFormat().format(viewers)} listening now
 				</div>
 			)}

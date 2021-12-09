@@ -18,6 +18,10 @@
 		grid-template-columns: repeat(3, 1fr);
 		grid-template-rows: repeat(3, 1fr);
 
+		.module {
+			background-color: rgba(0, 0, 0, var(--opacity));
+		}
+
 		.position-area {
 			display: flex;
 			flex-direction: column;

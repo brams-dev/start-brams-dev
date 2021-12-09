@@ -17,7 +17,7 @@ export default function Clock(props) {
 	useInterval(updateTime, 1000);
 
 	return (
-		<div className='Clock' style={{ backgroundColor: `rgba(0, 0, 0, ${props.opacity ?? 0.5})` }}>
+		<div className='Clock module'>
 			{time.hour}:{time.min}{props.shouldShowSeconds ? `:${time.sec}` : ''}
 		</div>
 	);

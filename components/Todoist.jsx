@@ -59,7 +59,7 @@ export default function Todoist(props) {
 	);
 
 	return (
-		<div className='Todoist' style={{ backgroundColor: `rgba(0, 0, 0, ${props.opacity ?? 0.5})` }}>
+		<div className='Todoist module'>
 			{overdue?.length > 0 && 
 				<div className='tasks overdue'>
 					<h3>Overdue</h3>

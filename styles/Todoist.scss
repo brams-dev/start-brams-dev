@@ -2,7 +2,7 @@
 	font-size: 0.8rem;
 	font-weight: 400;
 	padding: 1.2rem;
-	border-radius: 1.2rem;
+	border-radius: var(--radius-default);
 	max-width: 30rem;
 
 	.no-tasks {

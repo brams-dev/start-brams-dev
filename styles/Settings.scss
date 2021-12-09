@@ -38,9 +38,10 @@
 		grid-template-areas: 'menu' 'content';
 		grid-template-columns: 7rem 1fr;
 		padding: 1.2rem;
-		border-radius: 1.2rem;
+		border-radius: var(--radius-default);
 		width: 25rem;
 		height: auto;
+		background-color: rgba(0, 0, 0, var(--opacity));
 		transition: ease 0.5s background-color;
 	}
 
@@ -140,8 +141,11 @@
 		}
 
 		.yes-no {
-			span {
+			.options {
 				cursor: pointer;
+			}
+
+			span {
 				color: white;
 				text-decoration: line-through;
 				font-weight: 300;

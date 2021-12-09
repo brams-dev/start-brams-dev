@@ -5,6 +5,10 @@ import Todoist from './../components/Todoist';
 import Settings from './../components/Settings';
 import Astro from '../components/Astro';
 import YouTube from './../components/YouTube';
+import ClockSettings from '../components/Settings/ClockSettings';
+import TodoistSettings from '../components/Settings/TodoistSettings';
+import SunriseSettings from '../components/Settings/SunriseSettings';
+import VideoSettings from '../components/Settings/VideoSettings';
 
 const POSITIONS = [
 	'TOP_LEFT',
@@ -18,58 +22,64 @@ const POSITIONS = [
 	'BOTTOM_RIGHT'
 ];
 
+const MODULES = [
+	{
+		component: Clock,
+		settingsComponent: ClockSettings,
+		name: 'clock',
+		defaultSettings: {
+			shouldShowSeconds: false,
+			position: 'TOP_RIGHT'
+		}
+	},
+	{
+		component: Astro,
+		settingsComponent: SunriseSettings,
+		name: 'sun',
+		defaultSettings: {
+			showSun: false,
+			lat: '51.057',
+			long: '3.720',
+			position: 'TOP_RIGHT'
+		}
+	},
+	{
+		component: YouTube,
+		settingsComponent: VideoSettings,
+		name: 'youtube',
+		defaultSettings: {
+			volume: 0.05,
+			videoId: '5qap5aO4i9A',
+			showViewers: true,
+			viewersUpdateInterval: 30000,
+			position: 'BOTTOM_LEFT'
+		}
+	},
+	{
+		component: Todoist,
+		settingsComponent: TodoistSettings,
+		name: 'todoist',
+		defaultSettings: {
+			token: '',
+			position: 'BOTTOM_RIGHT'
+		}
+	},
+];
+
 export default function Home() {
 	const [settings, setSettings] = useState(null);
 
-	const components = [
-		{
-			component: Clock,
-			position: settings?.positions?.clock,
-			order: settings?.order?.findIndex(item => item === 'clock'),
-			visible: settings?.visible.clock,
-			props: {
-				opacity: settings?.general?.opacity,
-				shouldShowSeconds: settings?.clock?.shouldShowSeconds
-			}
-		},
-		{
-			component: Todoist,
-			position: settings?.positions?.todoist,
-			order: settings?.order?.findIndex(item => item === 'todoist'),
-			visible: settings?.visible.todoist,
-			props: {
-				opacity: settings?.general?.opacity,
-				token: settings?.todoist?.token
-			}
-		},
-		{
-			component: Astro,
-			position: settings?.positions?.astro,
-			order: settings?.order?.findIndex(item => item === 'astro'),
-			visible: settings?.visible.astro,
-			props: {
-				opacity: settings?.general?.opacity,
-				lat: settings?.astro?.lat,
-				long: settings?.astro?.long
-			}
-		},
-		{
-			component: YouTube,
-			position: settings?.positions?.youtube,
-			order: settings?.order?.findIndex(item => item === 'youtube'),
-			visible: settings?.visible.youtube,
-			props: {
-				opacity: settings?.general?.opacity,
-				...settings?.youtube
-			}
-		}
-	];
+	const getOrder = c => settings?.general?.order?.indexOf(c.name);
+	const getVisible = c => settings?.general?.visible?.[c.name];
+	const getPosition = c => settings?.[c.name]?.position;
 
 	return (
 		<div
 			className='Home'
 			style={{
-				backgroundImage: settings?.general?.background ? `url(${settings.general.background})` : ''
+				backgroundImage: settings?.general?.background ? `url(${settings.general.background})` : '',
+				'--radius-default': `${settings?.general?.radius / 10}rem`,
+				'--opacity': settings?.general?.opacity
 			}}
 		>
 			<Head>
@@ -88,19 +98,19 @@ export default function Home() {
 			<main>
 				{settings && POSITIONS.map(POS => (
 					<div className={`position-area ${POS}`} key={POS}>
-						{components
-							.filter(c => c.position === POS && c.visible)
-							.sort((a, b) => a.order - b.order)
+						{MODULES
+							.filter(c => getPosition(c) === POS && getVisible(c))
+							.sort((a, b) => getOrder(a) - getOrder(b))
 							.map(c => {
 								const Component = c.component;
-								return <Component key={c.component.name} {...c.props} />
+								return <Component key={c.name} {...settings?.[c.name]} />
 							})
 						}
 					</div>
 				))}
 			</main>
 
-			<Settings setSettings={setSettings} POSITIONS={POSITIONS} />
+			<Settings setSettings={setSettings} POSITIONS={POSITIONS} modules={MODULES} />
 		</div>
 	)
 }
