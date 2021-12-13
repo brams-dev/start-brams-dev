@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 
 export default function useLocalStorage(key, initialValue) {
-	const [isInitialized, setIsInitialized] = useState(false);
+	// const [isInitialized, setIsInitialized] = useState(false);
 
-	useEffect(() => {
-		setIsInitialized(true);
-	}, []);
+	// useEffect(() => {
+	// 	setIsInitialized(true);
+	// }, []);
 
 	const [storedValue, setStoredValue] = useState(() => {
 		if (typeof window !== 'undefined') {
@@ -32,7 +32,7 @@ export default function useLocalStorage(key, initialValue) {
 		}
 	};
 
-	if (!isInitialized) return [initialValue, () => null];
+	// if (!isInitialized) return [initialValue, () => console.log('!isInitialized')];
 
 	return [storedValue, setValue];
 }
