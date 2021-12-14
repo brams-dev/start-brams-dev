@@ -63,18 +63,19 @@ export default function Settings(props) {
 	const keyPressed = useKeyPress('s');
 	const [activeMenuItem, setActiveMenuItem] = useState('general');
 
-	const { settings, setSettings } = props;
+	const { settings, setSettings, isInitialized } = props;
 
 	useEffect(() => {
 		if (keyPressed && !showSettings) setShowSettings(!showSettings);
 	}, [keyPressed]);
 
 	useEffect(() => {
+		if (!isInitialized) return;
 		if (!settings) return setSettings(getDefaultSettings());
 		if (semver.lt(settings.version ?? EARLIEST_VERSION, LATEST_VERSION)) return setSettings(upgrade(settings));
 
 		setSettings(settings);
-	}, [settings]);
+	}, [settings, isInitialized]);
 
 	const setSetting = module => key => value => setSettings({ ...settings, [module]: { ...settings?.[module], [key]: value } });
 

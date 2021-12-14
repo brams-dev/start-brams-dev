@@ -74,7 +74,7 @@ const MODULES = [
 ];
 
 export default function Home() {
-	const [settings, setSettings] = useLocalStorage('settings');
+	const [settings, setSettings, isInitialized] = useLocalStorage('settings');
 	const { positions } = useContext(GlobalsContext);
 
 	const getOrder = c => settings?.general?.order?.indexOf(c.name);
@@ -118,7 +118,7 @@ export default function Home() {
 				))}
 			</main>
 
-			<Settings settings={settings} setSettings={setSettings} modules={MODULES} />
+			<Settings settings={settings} setSettings={setSettings} isInitialized={isInitialized} modules={MODULES} />
 		</div>
 	)
 }
