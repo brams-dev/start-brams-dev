@@ -21,11 +21,17 @@ export default function VideoSettings({ settings, setSetting }) {
 				{suggestions && (
 					<div className='suggestions'>
 						{suggestions.map(suggestion => (
-							<img key={suggestion.id} src={suggestion.image} alt="" onClick={() => setSetting('videoId')(suggestion.id)} />
+							<img
+								className={suggestion.id === settings.videoId ? 'selected' : ''}
+								key={suggestion.id}
+								src={suggestion.image}
+								alt=""
+								onClick={() => setSetting('videoId')(suggestion.id)}
+							/>
 						))}
 					</div>
 				)}
-				<input type='text' value={settings.videoId} onChange={e => setSetting('videoId', e.target.value)} />
+				<input type='text' value={settings.videoId} onChange={e => setSetting('videoId')(e.target.value)} />
 			</div>
 
 			{/* <Text
