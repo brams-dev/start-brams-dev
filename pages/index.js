@@ -56,7 +56,7 @@ const MODULES = [
 		name: 'video',
 		defaultSettings: {
 			volume: 0.05,
-			videoId: '5qap5aO4i9A',
+			videoId: 'jfKfPfyJRdk',
 			showViewers: true,
 			viewersUpdateInterval: 30000,
 			position: 'BOTTOM_LEFT'

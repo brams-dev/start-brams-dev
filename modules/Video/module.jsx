@@ -48,7 +48,7 @@ export default function Video(props) {
 			<div className='player'>
 				<Player
 					ref={playerRef}
-					url={`https://youtube.com/watch?v=${props.videoId}`}
+					url={`https://youtube-nocookie.com/watch?v=${props.videoId}`}
 					config={{
 						youtube: {
 							playerVars: {
