@@ -29,7 +29,6 @@ export default function Video(props) {
 
 			setViewers(result?.data?.items?.[0]?.liveStreamingDetails?.concurrentViewers);
 		};
-
 		
 		const interval = setInterval(getViewers, viewersUpdateInterval ?? 30000);
 		getViewers();

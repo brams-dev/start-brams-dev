@@ -24,7 +24,7 @@ export default function VideoSettings({ settings, setSetting }) {
 							<img
 								className={suggestion.id === settings.videoId ? 'selected' : ''}
 								key={suggestion.id}
-								src={suggestion.image}
+								src={`https://i.ytimg.com/vi/${suggestion.id}/maxresdefault.jpg`}
 								alt=""
 								onClick={() => setSetting('videoId')(suggestion.id)}
 							/>
